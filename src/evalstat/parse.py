@@ -77,11 +77,16 @@ def _arm_id(row: dict, by: str) -> Optional[str]:
     raise ValueError("by must be either prompt or provider")
 
 
+def vars_key(variables: dict) -> str:
+    """Canonical identity of a test case, so two sources agree on what a case is."""
+    return json.dumps(variables, sort_keys=True, ensure_ascii=False, default=str)
+
+
 def _pair_key(row: dict) -> Tuple[str, bool]:
     """Identity of the test case, and whether we had to fall back to position."""
     variables = row.get("vars") or (row.get("testCase") or {}).get("vars")
     if variables:
-        return json.dumps(variables, sort_keys=True, ensure_ascii=False, default=str), False
+        return vars_key(variables), False
     return "#%s" % row.get("testIdx"), True
 
 
@@ -134,6 +139,19 @@ def list_arms(doc: dict, by: str = "prompt") -> List[Tuple[str, str, int]]:
         label = labels.get(int(arm)) if by == "prompt" and arm.isdigit() else None
         arms.append((arm, label or arm, counts[arm]))
     return arms
+
+
+def list_metrics(doc: dict) -> List[str]:
+    """Metrics the file can actually be compared on, in a stable order."""
+    metrics = [SUCCESS]
+    if any(row.get(SCORE) is not None for row in _rows(doc)):
+        metrics.append(SCORE)
+    named = []
+    for row in _rows(doc):
+        for name in (row.get("namedScores") or {}):
+            if name not in named:
+                named.append(name)
+    return metrics + sorted(named)
 
 
 @dataclass

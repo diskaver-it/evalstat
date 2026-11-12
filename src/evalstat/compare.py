@@ -91,6 +91,64 @@ def compare(
     return verdict
 
 
+@dataclass
+class Family:
+    """Several metrics judged together, so the 5% belongs to the family."""
+
+    alpha: float
+    verdicts: List[Verdict]
+    adjusted: List[float]
+    decisions: List[str]
+    notes: List[str] = field(default_factory=list)
+
+    @property
+    def survivors(self) -> List[str]:
+        return [
+            v.metric for v, d in zip(self.verdicts, self.decisions) if d != UNDECIDED
+        ]
+
+
+def compare_family(
+    samples: List[PairedSample],
+    alpha: float = 0.05,
+    reps: int = 10000,
+    seed: int = 0,
+) -> Family:
+    if not samples:
+        raise ValueError("no metric to compare")
+    verdicts = [compare(s, alpha=alpha, reps=reps, seed=seed) for s in samples]
+    adjusted = stats.holm([v.p for v in verdicts])
+
+    decisions = []
+    for verdict, adjusted_p in zip(verdicts, adjusted):
+        if adjusted_p < alpha:
+            decisions.append(BETTER if verdict.diff > 0 else WORSE)
+        else:
+            decisions.append(UNDECIDED)
+
+    notes = []
+    lost = [
+        verdict.metric
+        for verdict, decision in zip(verdicts, decisions)
+        if verdict.decision != UNDECIDED and decision == UNDECIDED
+    ]
+    if lost:
+        notes.append(
+            "Significant on its own but not across %d metrics: %s. Looking at several "
+            "metrics gives several chances to be wrong, and the correction is what you "
+            "pay for having looked." % (len(samples), ", ".join(lost))
+        )
+    if len(samples) > 1 and not any(d != UNDECIDED for d in decisions):
+        notes.append("Nothing survives the correction, so nothing here is established.")
+    return Family(
+        alpha=alpha,
+        verdicts=verdicts,
+        adjusted=adjusted,
+        decisions=decisions,
+        notes=notes,
+    )
+
+
 def _notes(sample: PairedSample, verdict: Verdict) -> List[str]:
     notes = []
     if sample.positional_keys:
