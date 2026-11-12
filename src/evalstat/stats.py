@@ -229,3 +229,56 @@ def paired_mde(
         raise ValueError("n must be at least 1")
     z = norm_ppf(1 - alpha / 2) + norm_ppf(power)
     return z * sd_of_differences / math.sqrt(n)
+
+
+def _psi_e(lam: float) -> float:
+    return (-math.log(1 - lam) - lam) / 4.0
+
+
+def eb_confidence_sequence(
+    xs: Sequence[float], alpha: float = 0.05, cap: float = 0.5
+) -> Tuple[float, float]:
+    """Interval for the mean of values in [0, 1], valid at every n at once.
+
+    Predictable plug-in empirical Bernstein (Waudby-Smith and Ramdas). The betting
+    weight at step i is computed from the first i-1 observations only, which is the
+    whole trick: the bound adapts to the variance it has seen without using the
+    observation it is about to weigh. A variance estimate that peeked at the current
+    value would void the guarantee, in the same way that a feature built from a
+    figure published after the forecast date voids a backtest.
+
+    Because it is sequential, the result depends on the order the observations
+    arrive in. Any fixed order is valid; a different one gives a slightly different
+    interval.
+    """
+    if not 0.0 < alpha < 1.0:
+        raise ValueError("alpha must be between 0 and 1")
+    if not 0.0 < cap < 1.0:
+        raise ValueError("cap must be between 0 and 1")
+    if not xs:
+        return 0.0, 1.0
+
+    log_inv_alpha = math.log(1.0 / alpha)
+    running_sum = 0.0
+    running_var = 0.0
+    weighted = 0.0
+    weights = 0.0
+    penalty = 0.0
+
+    for i, x in enumerate(xs, start=1):
+        # Both estimates use only the first i-1 observations.
+        mu_prev = (0.5 + running_sum) / i
+        var_prev = (0.25 + running_var) / i
+        lam = math.sqrt(2.0 * log_inv_alpha / (max(var_prev, 1e-12) * i * math.log(1 + i)))
+        lam = min(lam, cap)
+
+        weighted += lam * x
+        weights += lam
+        penalty += 4.0 * (x - mu_prev) ** 2 * _psi_e(lam)
+
+        running_sum += x
+        running_var += (x - mu_prev) ** 2
+
+    centre = weighted / weights
+    radius = (log_inv_alpha + penalty) / weights
+    return max(0.0, centre - radius), min(1.0, centre + radius)
