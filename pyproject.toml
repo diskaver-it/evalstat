@@ -7,7 +7,7 @@ name = "evalstat"
 version = "0.1.0"
 description = "Tells you whether an LLM eval change is real or noise, using the pairing your eval run already has."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [{ name = "DIYAS" }]
 keywords = ["llm", "eval", "evals", "promptfoo", "statistics", "mcnemar", "ci"]
