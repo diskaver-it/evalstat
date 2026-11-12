@@ -231,6 +231,72 @@ def paired_mde(
     return z * sd_of_differences / math.sqrt(n)
 
 
+def holm(p_values: Sequence[float]) -> List[float]:
+    """Holm step-down adjusted p-values, in the order given.
+
+    Checking eight named scores at once gives eight chances to be wrong, so the
+    5% belongs to the family, not to each metric. Holm is used rather than
+    Bonferroni because it is uniformly more powerful and costs nothing extra, and
+    rather than Benjamini-Hochberg because a release gate wants no false alarms at
+    all, not a controlled share of them.
+    """
+    if not p_values:
+        return []
+    order = sorted(range(len(p_values)), key=lambda i: p_values[i])
+    total = len(p_values)
+    adjusted = [0.0] * total
+    running = 0.0
+    for rank, index in enumerate(order):
+        candidate = (total - rank) * p_values[index]
+        # Step-down: an adjusted p-value can never fall below an earlier one.
+        running = max(running, min(1.0, candidate))
+        adjusted[index] = running
+    return adjusted
+
+
+def cohen_kappa(labels_a: Sequence[float], labels_b: Sequence[float]) -> float:
+    """Agreement between two binary raters, with chance agreement taken out.
+
+    Raw agreement flatters a rater on a lopsided set: if 90% of cases pass, a
+    rater that says pass to everything agrees 90% of the time and knows nothing.
+    """
+    n = len(labels_a)
+    if n == 0 or n != len(labels_b):
+        raise ValueError("both raters must label the same cases")
+    observed = sum(1 for x, y in zip(labels_a, labels_b) if x == y) / n
+    rate_a = sum(labels_a) / n
+    rate_b = sum(labels_b) / n
+    chance = rate_a * rate_b + (1 - rate_a) * (1 - rate_b)
+    if chance >= 1.0:
+        return 1.0 if observed >= 1.0 else 0.0
+    return (observed - chance) / (1 - chance)
+
+
+def bootstrap_statistic_ci(
+    items: Sequence,
+    statistic,
+    alpha: float = 0.05,
+    reps: int = 2000,
+    seed: int = 0,
+) -> Tuple[float, float]:
+    """Percentile interval for any statistic of a resampled list of items."""
+    n = len(items)
+    if n == 0:
+        return float("nan"), float("nan")
+    rng = random.Random(seed)
+    values = []
+    for _ in range(reps):
+        sample = [items[rng.randrange(n)] for _ in range(n)]
+        try:
+            values.append(statistic(sample))
+        except (ValueError, ZeroDivisionError):
+            continue
+    if not values:
+        return float("nan"), float("nan")
+    values.sort()
+    return _quantile(values, alpha / 2), _quantile(values, 1 - alpha / 2)
+
+
 def _psi_e(lam: float) -> float:
     return (-math.log(1 - lam) - lam) / 4.0
 
