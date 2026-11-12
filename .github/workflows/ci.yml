@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: pip install -e ".[dev]"
+      - run: pytest -q
+
+  demo:
+    # The README quotes this output, so a change that breaks it fails the build.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -e .
+      - run: python examples/make_demo.py
+      - run: evalstat arms examples/demo_run.json
+      - run: evalstat compare examples/demo_run.json --fail-on regression
+      - name: the demo must read as undecided
+        run: |
+          evalstat compare examples/demo_run.json --format json > verdict.json
+          python -c "import json,sys; d=json.load(open('verdict.json')); sys.exit(0 if d['decision']=='undecided' else 1)"
