@@ -6,6 +6,7 @@ import json
 from dataclasses import asdict
 
 from .compare import BETTER, UNDECIDED, WORSE, Verdict
+from .plan import Plan
 
 HEADLINE = {
     BETTER: "better than %s",
@@ -115,6 +116,50 @@ def as_json(verdict: Verdict) -> str:
     payload["ci"] = list(verdict.ci)
     payload["headline"] = headline(verdict)
     return json.dumps(payload, indent=2, ensure_ascii=False)
+
+
+def plan_as_text(plan: Plan) -> str:
+    width = 38
+    lines = ["plan for %s, from %d paired test cases" % (plan.metric, plan.n), ""]
+    if plan.binary:
+        lines.append(
+            "  %-*s %d of %d pairs (%.1f%%)"
+            % (width, "the variants disagreed on", plan.discordant, plan.n, plan.spread * 100)
+        )
+        mde = "not reachable at any effect size" if plan.mde != plan.mde else "%+.1f pp" % (
+            plan.mde * 100
+        )
+    else:
+        lines.append(
+            "  %-*s %.3f" % (width, "spread of the paired differences", plan.spread)
+        )
+        mde = "%+.3f" % plan.mde
+    lines.append("  %-*s %s" % (width, "smallest effect these pairs can see", mde))
+    if plan.detect is not None:
+        target = "%+.1f pp" % (plan.detect * 100) if plan.binary else "%+.3f" % plan.detect
+        lines.append(
+            "  %-*s %s paired test cases" % (width, "to see %s you need" % target, "{:,}".format(plan.needed).replace(",", " "))
+        )
+    lines += [
+        "",
+        "  at %d%% power, alpha %.2f" % (round(plan.power * 100), plan.alpha),
+    ]
+    if plan.binary:
+        lines.append(
+            "  - Power comes from the pairs that disagree, not from the size of the eval "
+            "set. Two variants that agree on almost everything need an enormous set."
+        )
+    return "\n".join(lines)
+
+
+def plan_as_json(plan: Plan) -> str:
+    return json.dumps(asdict(plan), indent=2, ensure_ascii=False)
+
+
+def render_plan(plan: Plan, fmt: str = "text") -> str:
+    if fmt == "json":
+        return plan_as_json(plan)
+    return plan_as_text(plan)
 
 
 def render(verdict: Verdict, fmt: str = "text") -> str:

@@ -64,6 +64,26 @@ def test_two_files_are_compared_as_before_and_after(tmp_path, capsys):
     assert "before: v1" in out and "after: v2" in out
 
 
+def test_plan_reports_what_the_set_can_see(tmp_path, capsys):
+    assert main(["plan", _improved(tmp_path), "--detect", "0.03"]) == OK
+    out = capsys.readouterr().out
+    assert "the variants disagreed on" in out
+    assert "to see +3.0 pp you need" in out
+
+
+def test_plan_as_json(tmp_path, capsys):
+    assert main(["plan", _improved(tmp_path), "--format", "json"]) == OK
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["needed"] is None
+    assert payload["mde"] > 0
+
+
+def test_plan_refuses_a_file_where_nothing_disagreed(tmp_path, capsys):
+    doc = make_doc([("a", [True, False, True]), ("b", [True, False, True])])
+    assert main(["plan", write_doc(tmp_path, doc, "same.json")]) == BAD_INPUT
+    assert "agreed on every case" in capsys.readouterr().err
+
+
 def test_arms_lists_the_variants(tmp_path, capsys):
     assert main(["arms", _improved(tmp_path)]) == OK
     out = capsys.readouterr().out

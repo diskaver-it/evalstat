@@ -11,7 +11,8 @@ from typing import List, Optional
 
 from .compare import UNDECIDED, WORSE, compare
 from .parse import EvalFormatError, list_arms, load, pair_across, pair_within
-from .report import render
+from .plan import plan
+from .report import render, render_plan
 
 OK = 0
 GATE_TRIPPED = 1
@@ -47,6 +48,21 @@ def _build_parser() -> argparse.ArgumentParser:
         help="exit 1 on a significant regression, or on any significant change",
     )
 
+    plan_parser = sub.add_parser("plan", help="how many test cases would you need")
+    plan_parser.add_argument("files", nargs="+", metavar="FILE")
+    plan_parser.add_argument("--a")
+    plan_parser.add_argument("--b")
+    plan_parser.add_argument("--metric", default="success")
+    plan_parser.add_argument("--by", default="prompt", choices=["prompt", "provider"])
+    plan_parser.add_argument(
+        "--detect",
+        type=float,
+        help="effect you want to be able to see, e.g. 0.03 for three points",
+    )
+    plan_parser.add_argument("--power", type=float, default=0.8)
+    plan_parser.add_argument("--alpha", type=float, default=0.05)
+    plan_parser.add_argument("--format", default="text", choices=["text", "json"])
+
     arms_parser = sub.add_parser("arms", help="list the variants a file holds")
     arms_parser.add_argument("file", metavar="FILE")
     arms_parser.add_argument("--by", default="prompt", choices=["prompt", "provider"])
@@ -65,13 +81,11 @@ def _cmd_arms(args) -> int:
     return OK
 
 
-def _cmd_compare(args) -> int:
+def _sample_from(args):
     if len(args.files) > 2:
-        print("compare takes one or two files", file=sys.stderr)
-        return BAD_INPUT
-
+        raise EvalFormatError("this command takes one or two files")
     if len(args.files) == 2:
-        sample = pair_across(
+        return pair_across(
             load(args.files[0]),
             load(args.files[1]),
             a=args.a,
@@ -79,11 +93,19 @@ def _cmd_compare(args) -> int:
             metric=args.metric,
             by=args.by,
         )
-    else:
-        sample = pair_within(
-            load(args.files[0]), a=args.a, b=args.b, metric=args.metric, by=args.by
-        )
+    return pair_within(load(args.files[0]), a=args.a, b=args.b, metric=args.metric, by=args.by)
 
+
+def _cmd_plan(args) -> int:
+    result = plan(
+        _sample_from(args), detect=args.detect, alpha=args.alpha, power=args.power
+    )
+    print(render_plan(result, args.format))
+    return OK
+
+
+def _cmd_compare(args) -> int:
+    sample = _sample_from(args)
     verdict = compare(sample, alpha=args.alpha, reps=args.reps, seed=args.seed)
     print(render(verdict, args.format))
 
@@ -99,6 +121,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     try:
         if args.command == "arms":
             return _cmd_arms(args)
+        if args.command == "plan":
+            return _cmd_plan(args)
         return _cmd_compare(args)
     except (EvalFormatError, ValueError) as exc:
         print("evalstat: %s" % exc, file=sys.stderr)
