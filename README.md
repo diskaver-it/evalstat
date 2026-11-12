@@ -84,12 +84,46 @@ evalstat compare results.json --fail-on regression
 
 # how many cases would it take to see a three-point change?
 evalstat plan results.json --detect 0.03
+
+# the metric is watched after every commit, so judge it that way
+evalstat compare results.json --anytime --fail-on regression
 ```
 
 Options worth knowing: `--metric success|score|<named score>`, `--by prompt|provider`,
 `--a` / `--b` to pick variants by index or label, `--alpha`, `--format text|markdown|json`,
 `--fail-on none|regression|any`. The `markdown` format is meant to be pasted into a
 pull request; `json` is meant for whatever reads it next.
+
+## Wired into CI, the 5% is not 5%
+
+A gate does not look at the metric once. It looks after every commit, and the
+error rate is per look. Measured on a true null with twelve looks:
+
+| | flags a difference that is not there |
+| --- | --- |
+| fixed interval, read once at the end | 6.0% |
+| fixed interval, read at all twelve looks | **26.5%** |
+| anytime interval, read at all twelve looks | 1.0% |
+
+`--anytime` replaces the fixed interval with a confidence sequence, which holds at
+every sample size simultaneously. There is no number of looks to declare in advance
+and no alpha to spend across them, which matters because nobody knows how many
+commits a branch will take. On the demo it costs a factor of 2.4 in width:
+
+```
+watched continuously, alpha 0.05
+
+  difference           +6.0 pp
+  anytime interval     [-22.3 pp, +34.3 pp]
+  fixed interval       [-6.0 pp, +18.0 pp]   2.4 times narrower
+
+  VERDICT: not established under repeated looks
+```
+
+The bound adapts to the variance it has seen, and the weight it puts on each case
+is computed from the earlier cases only. That restriction is the whole reason the
+guarantee survives: a variance estimate that peeked at the value it is about to
+weigh would void it.
 
 ## The five decisions behind the numbers
 
@@ -132,9 +166,6 @@ and a dependency tree is the usual reason a check like this never gets adopted.
 
 ## What it does not do yet
 
-- **No correction for repeated looks.** Watching one metric across fifty commits is
-  fifty looks at the same question, and the 5% is per look. Always-valid bounds are
-  the planned fix.
 - **No correction across metrics.** Checking eight named scores at once inflates the
   false-positive rate; for now, pick the metric before you run it.
 - **No judge calibration.** If an LLM grades the outputs, its agreement with a human
@@ -143,13 +174,15 @@ and a dependency tree is the usual reason a check like this never gets adopted.
 
 ## Tested
 
-81 tests, no network and no API key: known chi-square quantiles and normal quantiles
-reproduced to nine decimals, the exact binomial checked against hand-computed tails
-and independently against 40 000 simulated coin flips, false-positive rates of both
-tests measured by simulation under a true null, and bootstrap coverage measured over
-200 synthetic experiments. The sample-size formula is not taken on trust either: a
-test computes the required `n`, runs the comparison that many times, and checks that
-the power it promised is the power it got.
+99 tests, no network and no API key: known chi-square and normal quantiles reproduced
+to nine decimals, the exact binomial checked against hand-computed tails and
+independently against 40 000 simulated coin flips, false-positive rates of both tests
+measured by simulation under a true null, and bootstrap coverage measured over 200
+synthetic experiments. Neither headline claim is taken on trust. The sample-size
+formula is checked by computing the required `n`, running the comparison that many
+times and confirming the promised power is the power achieved; the table above is a
+test, which peeks twelve times at a true null and fails if the sequence breaks or if
+the fixed interval does not.
 
 Honest limit on that: the parser is exercised against fixtures built to promptfoo's
 published `EvaluateResult` / `OutputFile` interfaces, not yet against a file written
