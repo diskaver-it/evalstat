@@ -5,7 +5,8 @@ from __future__ import annotations
 import json
 from dataclasses import asdict
 
-from .compare import BETTER, UNDECIDED, WORSE, Verdict
+from .compare import BETTER, UNDECIDED, WORSE, Family, Verdict
+from .judge import Judge
 from .plan import Plan
 from .sequential import Anytime
 
@@ -117,6 +118,93 @@ def as_json(verdict: Verdict) -> str:
     payload["ci"] = list(verdict.ci)
     payload["headline"] = headline(verdict)
     return json.dumps(payload, indent=2, ensure_ascii=False)
+
+
+def family_as_text(family: Family) -> str:
+    first = family.verdicts[0]
+    lines = [
+        "%d metrics on %d paired test cases, alpha %.2f across the family"
+        % (len(family.verdicts), first.n, family.alpha),
+        "",
+        "  %-16s %10s %9s %10s  %s" % ("metric", "difference", "p", "adjusted", "verdict"),
+    ]
+    for verdict, adjusted_p, decision in zip(family.verdicts, family.adjusted, family.decisions):
+        unit = _on_unit_scale(verdict)
+        lines.append(
+            "  %-16s %10s %9.3f %10.3f  %s"
+            % (verdict.metric[:16], _delta(verdict.diff, unit), verdict.p, adjusted_p, decision)
+        )
+    if family.notes:
+        lines.append("")
+        lines += ["  - %s" % note for note in family.notes]
+    return "\n".join(lines)
+
+
+def family_as_json(family: Family) -> str:
+    payload = {
+        "alpha": family.alpha,
+        "metrics": [
+            {
+                "metric": verdict.metric,
+                "diff": verdict.diff,
+                "ci": list(verdict.ci),
+                "p": verdict.p,
+                "adjusted_p": adjusted_p,
+                "decision": decision,
+                "n": verdict.n,
+            }
+            for verdict, adjusted_p, decision in zip(
+                family.verdicts, family.adjusted, family.decisions
+            )
+        ],
+        "survivors": family.survivors,
+        "notes": family.notes,
+    }
+    return json.dumps(payload, indent=2, ensure_ascii=False)
+
+
+def render_family(family: Family, fmt: str = "text") -> str:
+    if fmt == "json":
+        return family_as_json(family)
+    return family_as_text(family)
+
+
+def judge_as_text(result: Judge) -> str:
+    width = 26
+    lines = [
+        "judge calibration against %d labelled cases, variant %s"
+        % (result.n, result.variant),
+        "",
+        "  %-*s %.3f" % (width, "agreement with the humans", result.agreement),
+        "  %-*s %.3f   %d%% CI [%.3f, %.3f]"
+        % (width, "kappa, chance removed", result.kappa, 95, result.kappa_ci[0], result.kappa_ci[1]),
+        "  %-*s %.3f" % (width, "sensitivity", result.sensitivity),
+        "  %-*s %.3f" % (width, "specificity", result.specificity),
+        "  %-*s %.3f" % (width, "judge pass rate", result.judged_pass_rate),
+        "  %-*s %.3f" % (width, "human pass rate", result.truth_pass_rate),
+        "  %-*s %s"
+        % (
+            width,
+            "shrinkage factor",
+            "undefined" if result.attenuation != result.attenuation else "%.3f" % result.attenuation,
+        ),
+    ]
+    if result.notes:
+        lines.append("")
+        lines += ["  - %s" % note for note in result.notes]
+    return "\n".join(lines)
+
+
+def judge_as_json(result: Judge) -> str:
+    payload = asdict(result)
+    payload["kappa_ci"] = list(result.kappa_ci)
+    return json.dumps(payload, indent=2, ensure_ascii=False)
+
+
+def render_judge(result: Judge, fmt: str = "text") -> str:
+    if fmt == "json":
+        return judge_as_json(result)
+    return judge_as_text(result)
 
 
 def anytime_as_text(result: Anytime) -> str:

@@ -121,11 +121,97 @@ def test_plan_refuses_a_file_where_nothing_disagreed(tmp_path, capsys):
     assert "agreed on every case" in capsys.readouterr().err
 
 
-def test_arms_lists_the_variants(tmp_path, capsys):
+def test_arms_lists_the_variants_and_the_metrics(tmp_path, capsys):
     assert main(["arms", _improved(tmp_path)]) == OK
     out = capsys.readouterr().out
     assert "baseline" in out and "candidate" in out
     assert "2 variant(s)" in out
+    assert "metrics: success, score" in out
+
+
+def _multi_metric(tmp_path):
+    doc = make_doc(
+        [("baseline", [True] * 30 + [False] * 20), ("candidate", [True] * 37 + [False] * 13)],
+        named_metric="helpfulness",
+    )
+    return write_doc(tmp_path, doc, "multi.json")
+
+
+def test_several_metrics_are_judged_as_a_family(tmp_path, capsys):
+    assert main(["compare", _multi_metric(tmp_path), "--metric", "all", "--reps", "200"]) == OK
+    out = capsys.readouterr().out
+    assert "metrics on 50 paired test cases" in out
+    assert "adjusted" in out
+    assert "helpfulness" in out
+
+
+def test_a_comma_separated_list_picks_the_family(tmp_path, capsys):
+    args = ["compare", _multi_metric(tmp_path), "--metric", "success,helpfulness", "--reps", "200"]
+    assert main(args) == OK
+    assert "2 metrics" in capsys.readouterr().out
+
+
+def test_family_as_json_lists_every_metric(tmp_path, capsys):
+    args = [
+        "compare", _multi_metric(tmp_path), "--metric", "all", "--reps", "200", "--format", "json"
+    ]
+    main(args)
+    payload = json.loads(capsys.readouterr().out)
+    assert len(payload["metrics"]) == 3
+    assert all("adjusted_p" in row for row in payload["metrics"])
+
+
+def test_anytime_and_a_family_do_not_mix(tmp_path, capsys):
+    args = ["compare", _multi_metric(tmp_path), "--metric", "all", "--anytime"]
+    assert main(args) == BAD_INPUT
+    assert "one metric at a time" in capsys.readouterr().err
+
+
+def test_a_csv_table_can_be_compared(tmp_path, capsys):
+    rows = ["case,variant,value"]
+    for i in range(40):
+        rows.append("q%d,old,%d" % (i, 1 if i < 20 else 0))
+        rows.append("q%d,new,%d" % (i, 1 if i < 34 else 0))
+    path = tmp_path / "runs.csv"
+    path.write_text("\n".join(rows), encoding="utf-8")
+    assert main(["compare", str(path), "--reps", "200"]) == OK
+    out = capsys.readouterr().out
+    assert "old" in out and "new" in out
+
+
+def test_custom_columns_through_the_cli(tmp_path, capsys):
+    path = tmp_path / "custom.csv"
+    path.write_text("q,model,acc\nq1,gpt,1\nq1,claude,0\nq2,gpt,1\nq2,claude,1\n", encoding="utf-8")
+    args = [
+        "compare", str(path), "--reps", "100",
+        "--case-column", "q", "--variant-column", "model", "--value-column", "acc",
+    ]
+    assert main(args) == OK
+    assert "gpt" in capsys.readouterr().out
+
+
+def test_judge_through_the_cli(tmp_path, capsys):
+    from evalstat.parse import vars_key
+
+    labels = [
+        {"vars": {"question": "q%d" % i}, "pass": i < 28}
+        for i in range(50)
+    ]
+    labels_path = tmp_path / "labels.json"
+    labels_path.write_text(json.dumps(labels), encoding="utf-8")
+    assert vars_key({"question": "q0"})
+
+    args = ["judge", _multi_metric(tmp_path), "--truth", str(labels_path), "--reps", "200"]
+    assert main(args) == OK
+    out = capsys.readouterr().out
+    assert "agreement with the humans" in out
+    assert "shrinkage factor" in out
+
+
+def test_judge_reports_a_missing_labels_file(tmp_path, capsys):
+    args = ["judge", _multi_metric(tmp_path), "--truth", str(tmp_path / "nope.json")]
+    assert main(args) == BAD_INPUT
+    assert "evalstat:" in capsys.readouterr().err
 
 
 def test_a_missing_file_is_reported_not_raised(tmp_path, capsys):
