@@ -1,0 +1,1920 @@
+{
+ "evalId": "demo",
+ "results": {
+  "version": 3,
+  "timestamp": "2026-11-12T00:00:00Z",
+  "results": [
+   {
+    "promptIdx": 0,
+    "testIdx": 0,
+    "promptId": "p0",
+    "vars": {
+     "question": "q000"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 0,
+    "promptId": "p1",
+    "vars": {
+     "question": "q000"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 1,
+    "promptId": "p0",
+    "vars": {
+     "question": "q001"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 1,
+    "promptId": "p1",
+    "vars": {
+     "question": "q001"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 2,
+    "promptId": "p0",
+    "vars": {
+     "question": "q002"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 2,
+    "promptId": "p1",
+    "vars": {
+     "question": "q002"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 3,
+    "promptId": "p0",
+    "vars": {
+     "question": "q003"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 3,
+    "promptId": "p1",
+    "vars": {
+     "question": "q003"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 4,
+    "promptId": "p0",
+    "vars": {
+     "question": "q004"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 4,
+    "promptId": "p1",
+    "vars": {
+     "question": "q004"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 5,
+    "promptId": "p0",
+    "vars": {
+     "question": "q005"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 5,
+    "promptId": "p1",
+    "vars": {
+     "question": "q005"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 6,
+    "promptId": "p0",
+    "vars": {
+     "question": "q006"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 6,
+    "promptId": "p1",
+    "vars": {
+     "question": "q006"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 7,
+    "promptId": "p0",
+    "vars": {
+     "question": "q007"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 7,
+    "promptId": "p1",
+    "vars": {
+     "question": "q007"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 8,
+    "promptId": "p0",
+    "vars": {
+     "question": "q008"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 8,
+    "promptId": "p1",
+    "vars": {
+     "question": "q008"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 9,
+    "promptId": "p0",
+    "vars": {
+     "question": "q009"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 9,
+    "promptId": "p1",
+    "vars": {
+     "question": "q009"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 10,
+    "promptId": "p0",
+    "vars": {
+     "question": "q010"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 10,
+    "promptId": "p1",
+    "vars": {
+     "question": "q010"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 11,
+    "promptId": "p0",
+    "vars": {
+     "question": "q011"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 11,
+    "promptId": "p1",
+    "vars": {
+     "question": "q011"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 12,
+    "promptId": "p0",
+    "vars": {
+     "question": "q012"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 12,
+    "promptId": "p1",
+    "vars": {
+     "question": "q012"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 13,
+    "promptId": "p0",
+    "vars": {
+     "question": "q013"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 13,
+    "promptId": "p1",
+    "vars": {
+     "question": "q013"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 14,
+    "promptId": "p0",
+    "vars": {
+     "question": "q014"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 14,
+    "promptId": "p1",
+    "vars": {
+     "question": "q014"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 15,
+    "promptId": "p0",
+    "vars": {
+     "question": "q015"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 15,
+    "promptId": "p1",
+    "vars": {
+     "question": "q015"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 16,
+    "promptId": "p0",
+    "vars": {
+     "question": "q016"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 16,
+    "promptId": "p1",
+    "vars": {
+     "question": "q016"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 17,
+    "promptId": "p0",
+    "vars": {
+     "question": "q017"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 17,
+    "promptId": "p1",
+    "vars": {
+     "question": "q017"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 18,
+    "promptId": "p0",
+    "vars": {
+     "question": "q018"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 18,
+    "promptId": "p1",
+    "vars": {
+     "question": "q018"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 19,
+    "promptId": "p0",
+    "vars": {
+     "question": "q019"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 19,
+    "promptId": "p1",
+    "vars": {
+     "question": "q019"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 20,
+    "promptId": "p0",
+    "vars": {
+     "question": "q020"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 20,
+    "promptId": "p1",
+    "vars": {
+     "question": "q020"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 21,
+    "promptId": "p0",
+    "vars": {
+     "question": "q021"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 21,
+    "promptId": "p1",
+    "vars": {
+     "question": "q021"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 22,
+    "promptId": "p0",
+    "vars": {
+     "question": "q022"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 22,
+    "promptId": "p1",
+    "vars": {
+     "question": "q022"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 23,
+    "promptId": "p0",
+    "vars": {
+     "question": "q023"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 23,
+    "promptId": "p1",
+    "vars": {
+     "question": "q023"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 24,
+    "promptId": "p0",
+    "vars": {
+     "question": "q024"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 24,
+    "promptId": "p1",
+    "vars": {
+     "question": "q024"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 25,
+    "promptId": "p0",
+    "vars": {
+     "question": "q025"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 25,
+    "promptId": "p1",
+    "vars": {
+     "question": "q025"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 26,
+    "promptId": "p0",
+    "vars": {
+     "question": "q026"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 26,
+    "promptId": "p1",
+    "vars": {
+     "question": "q026"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 27,
+    "promptId": "p0",
+    "vars": {
+     "question": "q027"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 27,
+    "promptId": "p1",
+    "vars": {
+     "question": "q027"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 28,
+    "promptId": "p0",
+    "vars": {
+     "question": "q028"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 28,
+    "promptId": "p1",
+    "vars": {
+     "question": "q028"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 29,
+    "promptId": "p0",
+    "vars": {
+     "question": "q029"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 29,
+    "promptId": "p1",
+    "vars": {
+     "question": "q029"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 30,
+    "promptId": "p0",
+    "vars": {
+     "question": "q030"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 30,
+    "promptId": "p1",
+    "vars": {
+     "question": "q030"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 31,
+    "promptId": "p0",
+    "vars": {
+     "question": "q031"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 31,
+    "promptId": "p1",
+    "vars": {
+     "question": "q031"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 32,
+    "promptId": "p0",
+    "vars": {
+     "question": "q032"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 32,
+    "promptId": "p1",
+    "vars": {
+     "question": "q032"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 33,
+    "promptId": "p0",
+    "vars": {
+     "question": "q033"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 33,
+    "promptId": "p1",
+    "vars": {
+     "question": "q033"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 34,
+    "promptId": "p0",
+    "vars": {
+     "question": "q034"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 34,
+    "promptId": "p1",
+    "vars": {
+     "question": "q034"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 35,
+    "promptId": "p0",
+    "vars": {
+     "question": "q035"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 35,
+    "promptId": "p1",
+    "vars": {
+     "question": "q035"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 36,
+    "promptId": "p0",
+    "vars": {
+     "question": "q036"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 36,
+    "promptId": "p1",
+    "vars": {
+     "question": "q036"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 37,
+    "promptId": "p0",
+    "vars": {
+     "question": "q037"
+    },
+    "success": true,
+    "score": 1.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 37,
+    "promptId": "p1",
+    "vars": {
+     "question": "q037"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 38,
+    "promptId": "p0",
+    "vars": {
+     "question": "q038"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 38,
+    "promptId": "p1",
+    "vars": {
+     "question": "q038"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 39,
+    "promptId": "p0",
+    "vars": {
+     "question": "q039"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 39,
+    "promptId": "p1",
+    "vars": {
+     "question": "q039"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 40,
+    "promptId": "p0",
+    "vars": {
+     "question": "q040"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 40,
+    "promptId": "p1",
+    "vars": {
+     "question": "q040"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 41,
+    "promptId": "p0",
+    "vars": {
+     "question": "q041"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 41,
+    "promptId": "p1",
+    "vars": {
+     "question": "q041"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 42,
+    "promptId": "p0",
+    "vars": {
+     "question": "q042"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 42,
+    "promptId": "p1",
+    "vars": {
+     "question": "q042"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 43,
+    "promptId": "p0",
+    "vars": {
+     "question": "q043"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 43,
+    "promptId": "p1",
+    "vars": {
+     "question": "q043"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 44,
+    "promptId": "p0",
+    "vars": {
+     "question": "q044"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 44,
+    "promptId": "p1",
+    "vars": {
+     "question": "q044"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 45,
+    "promptId": "p0",
+    "vars": {
+     "question": "q045"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 45,
+    "promptId": "p1",
+    "vars": {
+     "question": "q045"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 46,
+    "promptId": "p0",
+    "vars": {
+     "question": "q046"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 46,
+    "promptId": "p1",
+    "vars": {
+     "question": "q046"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 47,
+    "promptId": "p0",
+    "vars": {
+     "question": "q047"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 47,
+    "promptId": "p1",
+    "vars": {
+     "question": "q047"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 48,
+    "promptId": "p0",
+    "vars": {
+     "question": "q048"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 48,
+    "promptId": "p1",
+    "vars": {
+     "question": "q048"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   },
+   {
+    "promptIdx": 0,
+    "testIdx": 49,
+    "promptId": "p0",
+    "vars": {
+     "question": "q049"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 0"
+    }
+   },
+   {
+    "promptIdx": 1,
+    "testIdx": 49,
+    "promptId": "p1",
+    "vars": {
+     "question": "q049"
+    },
+    "success": false,
+    "score": 0.0,
+    "namedScores": {},
+    "latencyMs": 420,
+    "provider": {
+     "id": "openai:gpt-demo",
+     "label": "openai:gpt-demo"
+    },
+    "prompt": {
+     "raw": "prompt 1"
+    }
+   }
+  ],
+  "prompts": [
+   {
+    "label": "baseline prompt"
+   },
+   {
+    "label": "new prompt"
+   }
+  ],
+  "stats": {}
+ },
+ "config": {},
+ "shareableUrl": null
+}
