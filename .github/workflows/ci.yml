@@ -35,6 +35,7 @@ jobs:
       - run: evalstat compare examples/demo_run.json --fail-on regression
       - run: evalstat plan examples/demo_run.json --detect 0.03
       - run: evalstat compare examples/demo_run.json --anytime --fail-on regression
+      - run: evalstat compare examples/demo_run.json --metric all
       - name: the demo must read as undecided
         run: |
           evalstat compare examples/demo_run.json --format json > verdict.json
