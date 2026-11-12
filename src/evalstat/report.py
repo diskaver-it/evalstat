@@ -7,6 +7,7 @@ from dataclasses import asdict
 
 from .compare import BETTER, UNDECIDED, WORSE, Verdict
 from .plan import Plan
+from .sequential import Anytime
 
 HEADLINE = {
     BETTER: "better than %s",
@@ -115,6 +116,62 @@ def as_json(verdict: Verdict) -> str:
     payload = asdict(verdict)
     payload["ci"] = list(verdict.ci)
     payload["headline"] = headline(verdict)
+    return json.dumps(payload, indent=2, ensure_ascii=False)
+
+
+def anytime_as_text(result: Anytime) -> str:
+    unit = result.scale <= 1.0
+    width = 20
+    lines = [
+        "watched continuously, alpha %.2f" % result.alpha,
+        "",
+        "  %-*s %s" % (width, "difference", _delta(result.diff, unit)),
+        "  %-*s [%s, %s]"
+        % (
+            width,
+            "anytime interval",
+            _delta(result.interval[0], unit),
+            _delta(result.interval[1], unit),
+        ),
+        "  %-*s [%s, %s]   %.1f times narrower"
+        % (
+            width,
+            "fixed interval",
+            _delta(result.fixed_interval[0], unit),
+            _delta(result.fixed_interval[1], unit),
+            result.width_ratio,
+        ),
+        "",
+        "  VERDICT: %s under repeated looks" % result.decision,
+    ]
+    if result.notes:
+        lines.append("")
+        lines += ["  - %s" % note for note in result.notes]
+    return "\n".join(lines)
+
+
+def anytime_as_json(result: Anytime) -> str:
+    return json.dumps(_anytime_payload(result), indent=2, ensure_ascii=False)
+
+
+def _anytime_payload(result: Anytime) -> dict:
+    payload = asdict(result)
+    payload["interval"] = list(result.interval)
+    payload["fixed_interval"] = list(result.fixed_interval)
+    return payload
+
+
+def render_anytime(result: Anytime, fmt: str = "text") -> str:
+    if fmt == "json":
+        return anytime_as_json(result)
+    return anytime_as_text(result)
+
+
+def combined_as_json(verdict: Verdict, result: Anytime) -> str:
+    payload = asdict(verdict)
+    payload["ci"] = list(verdict.ci)
+    payload["headline"] = headline(verdict)
+    payload["anytime"] = _anytime_payload(result)
     return json.dumps(payload, indent=2, ensure_ascii=False)
 
 

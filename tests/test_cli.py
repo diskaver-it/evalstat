@@ -64,6 +64,43 @@ def test_two_files_are_compared_as_before_and_after(tmp_path, capsys):
     assert "before: v1" in out and "after: v2" in out
 
 
+def test_anytime_adds_a_second_block(tmp_path, capsys):
+    assert main(["compare", _improved(tmp_path), "--reps", "200", "--anytime"]) == OK
+    out = capsys.readouterr().out
+    assert "watched continuously" in out
+    assert "anytime interval" in out
+    assert "times narrower" in out
+
+
+def test_anytime_in_json_is_one_object(tmp_path, capsys):
+    main(["compare", _improved(tmp_path), "--reps", "200", "--anytime", "--format", "json"])
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["decision"] == "better"
+    assert payload["anytime"]["decision"] in ("established", "not established")
+    assert len(payload["anytime"]["interval"]) == 2
+
+
+def test_the_gate_gets_stricter_under_anytime(tmp_path):
+    # A regression the fixed test calls significant, on a set too small to
+    # establish it when the metric is watched after every commit.
+    doc = make_doc(
+        [("baseline", [True] * 24 + [False] * 16), ("candidate", [True] * 15 + [False] * 25)]
+    )
+    path = write_doc(tmp_path, doc, "small_regression.json")
+    assert main(["compare", path, "--reps", "200", "--fail-on", "regression"]) == GATE_TRIPPED
+    args = ["compare", path, "--reps", "200", "--fail-on", "regression", "--anytime"]
+    assert main(args) == OK
+
+
+def test_anytime_still_trips_on_a_large_regression(tmp_path):
+    doc = make_doc(
+        [("baseline", [True] * 180 + [False] * 20), ("candidate", [False] * 150 + [True] * 50)]
+    )
+    path = write_doc(tmp_path, doc, "big_regression.json")
+    args = ["compare", path, "--reps", "200", "--fail-on", "regression", "--anytime"]
+    assert main(args) == GATE_TRIPPED
+
+
 def test_plan_reports_what_the_set_can_see(tmp_path, capsys):
     assert main(["plan", _improved(tmp_path), "--detect", "0.03"]) == OK
     out = capsys.readouterr().out

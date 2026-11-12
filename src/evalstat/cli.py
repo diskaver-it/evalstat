@@ -9,10 +9,11 @@ import argparse
 import sys
 from typing import List, Optional
 
-from .compare import UNDECIDED, WORSE, compare
+from .compare import BETTER, UNDECIDED, WORSE, compare
 from .parse import EvalFormatError, list_arms, load, pair_across, pair_within
 from .plan import plan
-from .report import render, render_plan
+from .report import combined_as_json, render, render_anytime, render_plan
+from .sequential import NOT_ESTABLISHED, anytime
 
 OK = 0
 GATE_TRIPPED = 1
@@ -46,6 +47,12 @@ def _build_parser() -> argparse.ArgumentParser:
         default="none",
         choices=["none", "regression", "any"],
         help="exit 1 on a significant regression, or on any significant change",
+    )
+    cmp_parser.add_argument(
+        "--anytime",
+        action="store_true",
+        help="add an interval that stays valid when the metric is watched after "
+        "every commit, and judge the gate by it",
     )
 
     plan_parser = sub.add_parser("plan", help="how many test cases would you need")
@@ -107,11 +114,31 @@ def _cmd_plan(args) -> int:
 def _cmd_compare(args) -> int:
     sample = _sample_from(args)
     verdict = compare(sample, alpha=args.alpha, reps=args.reps, seed=args.seed)
-    print(render(verdict, args.format))
 
-    if args.fail_on == "regression" and verdict.decision == WORSE:
+    watched = None
+    if args.anytime:
+        watched = anytime(sample, alpha=args.alpha, reps=args.reps, seed=args.seed)
+
+    if watched is not None and args.format == "json":
+        print(combined_as_json(verdict, watched))
+    else:
+        print(render(verdict, args.format))
+        if watched is not None:
+            print()
+            print(render_anytime(watched, args.format))
+
+    decision = verdict.decision
+    if watched is not None:
+        # The gate answers the question the pipeline actually asks, which is asked
+        # again on every commit.
+        if watched.decision == NOT_ESTABLISHED:
+            decision = UNDECIDED
+        else:
+            decision = WORSE if watched.diff < 0 else BETTER
+
+    if args.fail_on == "regression" and decision == WORSE:
         return GATE_TRIPPED
-    if args.fail_on == "any" and verdict.decision != UNDECIDED:
+    if args.fail_on == "any" and decision != UNDECIDED:
         return GATE_TRIPPED
     return OK
 
